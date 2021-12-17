@@ -8,7 +8,7 @@ class Counter extends React.Component {
 		return (
 			<div className={counterClass}>
 				<p>
-					{counterText} {this.props.score} from counter
+					{counterText} {this.props.score}
 				</p>
 			</div>
 		);

@@ -12,15 +12,21 @@ class Board extends React.Component {
     playerTurn: 1,
     playerWinner: 0,
     display: "none",
-    test: 1,
     inputValue: 0,
-    chickenChickenWinnerDinner: 100,
+    chickenChickenWinnerDinner: 21,
+    player1Wins: 0,
+    player2Wins: 0,
   };
 
   ScoreChange = (sum) => {
     if (this.state.playerTurn === 1) {
       if (sum === 0) {
-        this.setState({ playerTemporaryScore1: 0 }, this.HoldScore);
+        this.setState(
+          {
+            playerTemporaryScore1: 0,
+          },
+          this.HoldScore
+        );
       } else {
         this.setState({
           playerTemporaryScore1: this.state.playerTemporaryScore1 + sum,
@@ -29,7 +35,12 @@ class Board extends React.Component {
     }
     if (this.state.playerTurn === 2) {
       if (sum === 0) {
-        this.setState({ playerTemporaryScore2: 0 }, this.HoldScore);
+        this.setState(
+          {
+            playerTemporaryScore2: 0,
+          },
+          this.HoldScore
+        );
       } else {
         this.setState({
           playerTemporaryScore2: this.state.playerTemporaryScore2 + sum,
@@ -63,14 +74,23 @@ class Board extends React.Component {
   };
 
   onChaneValue = (event) => {
-    this.setState({ chickenChickenWinnerDinner: event.target.value });
+    if (+event.target.value) {
+      console.log("works from change");
+      console.log(event.target.value);
+      this.setState({
+        chickenChickenWinnerDinner: event.target.value,
+      });
+    }
   };
   Winner = () => {
+    console.log(this.state.player1Wins);
+    console.log(this.state.player2Wins);
     if (this.state.playerScore1 >= this.state.chickenChickenWinnerDinner) {
       this.setState((prevState) => {
         return {
           display: "flex",
           playerWinner: prevState.playerWinner + 1,
+          player1Wins: prevState.player1Wins + 1,
         };
       });
     }
@@ -79,6 +99,7 @@ class Board extends React.Component {
         return {
           display: "flex",
           playerWinner: prevState.playerWinner + 2,
+          player2Wins: prevState.player2Wins + 1,
         };
       });
     }
@@ -95,6 +116,30 @@ class Board extends React.Component {
       playerWinner: 0,
     });
   };
+  ClearAll = () => {
+    this.setState({
+      playerScore1: 0,
+      playerScore2: 0,
+      playerTemporaryScore1: 0,
+      playerTemporaryScore2: 0,
+      playerTurn: 1,
+      display: "none",
+      playerWinner: 0,
+      inputValue: 0,
+      chickenChickenWinnerDinner: 21,
+      player1Wins: 0,
+      player2Wins: 0,
+    });
+  };
+  componentDidMount() {
+    if (JSON.parse(localStorage.getItem("state"))) {
+      this.setState(JSON.parse(window.localStorage.getItem("state")));
+    }
+  }
+
+  componentDidUpdate() {
+    localStorage.setItem("state", JSON.stringify(this.state));
+  }
 
   render() {
     const {
@@ -102,12 +147,18 @@ class Board extends React.Component {
       playerScore2,
       playerTemporaryScore1,
       playerTemporaryScore2,
+      inputValue,
+      display,
+      playerWinner,
+      player1Wins,
+      player2Wins,
     } = this.state;
     return (
       <div>
         <div className="playerContainer">
           <div className="player1">
             <Player
+              wins={player1Wins}
               playerNumber={1}
               playerTemporaryScore={playerTemporaryScore1}
               playerScore={playerScore1}
@@ -115,6 +166,7 @@ class Board extends React.Component {
           </div>
           <div className="player2">
             <Player
+              wins={player2Wins}
               playerNumber={2}
               playerTemporaryScore={playerTemporaryScore2}
               playerScore={playerScore2}
@@ -124,16 +176,20 @@ class Board extends React.Component {
         <Dice onChange={this.ScoreChange} />
         <input
           type="text"
-          vlaue={this.state.inputValue}
+          minLength="1"
+          maxLength="3"
+          vlaue={inputValue}
+          style={{ width: "10rem" }}
           onChange={(event) => this.onChaneValue(event)}
         />{" "}
         <br />
         <button type="button" onClick={this.HoldScore}>
           Hold
         </button>
-        <div className="winner" style={{ display: this.state.display }}>
-          <p>Player {this.state.playerWinner} wins!!!!!</p>
+        <div className="winner" style={{ display: display }}>
+          <p>Player {playerWinner} wins!!!!!</p>
           <button onClick={() => this.Clear()}>Want To Play Again?</button>
+          <button onClick={() => this.ClearAll()}>Restart the stast?</button>
         </div>
       </div>
     );
