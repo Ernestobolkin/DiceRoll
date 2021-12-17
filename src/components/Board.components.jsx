@@ -92,6 +92,7 @@ class Board extends React.Component {
       playerTemporaryScore2: 0,
       playerTurn: 1,
       display: "none",
+      playerWinner: 0,
     });
   };
 
