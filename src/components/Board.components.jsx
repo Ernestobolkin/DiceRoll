@@ -1,7 +1,7 @@
 import React from "react";
 import Player from "./Player/Player.components";
 import Dice from "./Dice/Dice.components";
-import "./Board.styles.css";
+import "./boarAssets/Board.styles.css";
 
 class Board extends React.Component {
   state = {
@@ -13,7 +13,7 @@ class Board extends React.Component {
     playerWinner: 0,
     display: "none",
     inputValue: 0,
-    chickenChickenWinnerDinner: 21,
+    chickenChickenWinnerDinner: 100,
     player1Wins: 0,
     player2Wins: 0,
   };
@@ -85,6 +85,7 @@ class Board extends React.Component {
   Winner = () => {
     console.log(this.state.player1Wins);
     console.log(this.state.player2Wins);
+    console.log(this.state.chickenChickenWinnerDinner);
     if (this.state.playerScore1 >= this.state.chickenChickenWinnerDinner) {
       this.setState((prevState) => {
         return {
@@ -126,7 +127,6 @@ class Board extends React.Component {
       display: "none",
       playerWinner: 0,
       inputValue: 0,
-      chickenChickenWinnerDinner: 21,
       player1Wins: 0,
       player2Wins: 0,
     });
@@ -174,22 +174,32 @@ class Board extends React.Component {
           </div>
         </div>
         <Dice onChange={this.ScoreChange} />
-        <input
-          type="text"
-          minLength="1"
-          maxLength="3"
-          vlaue={inputValue}
-          style={{ width: "10rem" }}
-          onChange={(event) => this.onChaneValue(event)}
-        />{" "}
-        <br />
-        <button type="button" onClick={this.HoldScore}>
-          Hold
-        </button>
+        <div className="inputsContainer">
+          <button className="hold btn" type="button" onClick={this.HoldScore}>
+            Hold
+          </button>
+          <br />
+          <input
+            className="input"
+            type="text"
+            minLength="1"
+            maxLength="3"
+            vlaue={inputValue}
+            style={{ width: "10rem" }}
+            onChange={(event) => this.onChaneValue(event)}
+          />
+        </div>
         <div className="winner" style={{ display: display }}>
-          <p>Player {playerWinner} wins!!!!!</p>
-          <button onClick={() => this.Clear()}>Want To Play Again?</button>
-          <button onClick={() => this.ClearAll()}>Restart the stast?</button>
+          <p>
+            PLAYER <span style={{ color: "#DA0037" }}>{playerWinner}</span>{" "}
+            WINS!
+          </p>
+          <button className="WinnerBtn btn" onClick={() => this.Clear()}>
+            Want To Play Again?
+          </button>
+          <button className="WinnerBtn btn" onClick={() => this.ClearAll()}>
+            Restart the stast
+          </button>
         </div>
       </div>
     );

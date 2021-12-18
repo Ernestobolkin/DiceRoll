@@ -1,0 +1,12 @@
+#playerInnerCard{
+  color: #222831;
+  text-align: center;
+}
+#playerInnerCard p{
+  font-size: 2rem;
+}
+#playerInnerCard h2{
+  font-size: 6vh;
+  font-weight: 500;
+  margin: 10px 0 ;
+}
