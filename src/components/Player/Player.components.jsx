@@ -6,7 +6,7 @@ const Player = (props) => {
   const { wins, playerScore, playerTemporaryScore, playerNumber } = props;
   return (
     <div id="playerInnerCard" className={`player-${playerNumber}`}>
-      <p>wins: {wins}</p>
+      <p className="wins">wins: <span>{wins}</span></p>
       <h2>Player {playerNumber}</h2>
       <Counter
         className="test"

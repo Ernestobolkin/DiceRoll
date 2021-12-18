@@ -17,7 +17,6 @@ class Board extends React.Component {
     player1Wins: 0,
     player2Wins: 0,
   };
-
   ScoreChange = (sum) => {
     if (this.state.playerTurn === 1) {
       if (sum === 0) {
@@ -49,6 +48,7 @@ class Board extends React.Component {
     }
   };
   HoldScore = () => {
+    this.CurrentPlayer();
     if (this.state.playerTurn === 1) {
       this.setState(
         {
@@ -70,6 +70,20 @@ class Board extends React.Component {
         },
         this.Winner
       );
+    }
+  };
+
+  CurrentPlayer = () => {
+    // "#eeeeee"
+    const playerColor1 = document.querySelector("#player1");
+    const playerColor2 = document.querySelector("#player2");
+    playerColor1.className = "";
+    playerColor2.className = "";
+
+    if (this.state.playerTurn === 1) {
+      playerColor1.className = "colors";
+    } else {
+      playerColor2.className = "colors";
     }
   };
 
@@ -129,6 +143,7 @@ class Board extends React.Component {
       inputValue: 0,
       player1Wins: 0,
       player2Wins: 0,
+      chickenChickenWinnerDinner: 100,
     });
   };
   componentDidMount() {
@@ -138,6 +153,7 @@ class Board extends React.Component {
   }
 
   componentDidUpdate() {
+    this.CurrentPlayer()
     localStorage.setItem("state", JSON.stringify(this.state));
   }
 
@@ -156,7 +172,7 @@ class Board extends React.Component {
     return (
       <div>
         <div className="playerContainer">
-          <div className="player1">
+          <div id="player1">
             <Player
               wins={player1Wins}
               playerNumber={1}
@@ -164,7 +180,7 @@ class Board extends React.Component {
               playerScore={playerScore1}
             />
           </div>
-          <div className="player2">
+          <div id="player2">
             <Player
               wins={player2Wins}
               playerNumber={2}
@@ -185,14 +201,12 @@ class Board extends React.Component {
             minLength="1"
             maxLength="3"
             vlaue={inputValue}
-            style={{ width: "10rem" }}
             onChange={(event) => this.onChaneValue(event)}
           />
         </div>
         <div className="winner" style={{ display: display }}>
           <p>
-            PLAYER <span style={{ color: "#DA0037" }}>{playerWinner}</span>{" "}
-            WINS!
+            PLAYER <span>{playerWinner}</span> WINS!
           </p>
           <button className="WinnerBtn btn" onClick={() => this.Clear()}>
             Want To Play Again?
