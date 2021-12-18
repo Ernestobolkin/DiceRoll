@@ -40,14 +40,11 @@
   height: 100px;
   margin-bottom: 10px;
 }
-#diceContainer {
+.diceLogicContainer{
+  position: absolute;
+  width: 100vw;
+  top: 25vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  transform: translateY(-55vh);
-}
-.throwBtn{
-  display: flex;
-  margin: 0 auto;
-  transform: translateY(-50vh);
 }

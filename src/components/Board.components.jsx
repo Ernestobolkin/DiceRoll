@@ -3,6 +3,9 @@ import Player from "./Player/Player.components";
 import Dice from "./Dice/Dice.components";
 import "./boarAssets/Board.styles.css";
 
+
+
+
 class Board extends React.Component {
   state = {
     playerScore1: 0,
@@ -85,17 +88,12 @@ class Board extends React.Component {
   };
   onChaneValue = (event) => {
     if (+event.target.value) {
-      console.log("works from change");
-      console.log(event.target.value);
       this.setState({
         chickenChickenWinnerDinner: event.target.value,
       });
     }
   };
   Winner = () => {
-    console.log(this.state.player1Wins);
-    console.log(this.state.player2Wins);
-    console.log(this.state.chickenChickenWinnerDinner);
     if (this.state.playerScore1 >= this.state.chickenChickenWinnerDinner) {
       this.setState((prevState) => {
         return {
@@ -147,7 +145,7 @@ class Board extends React.Component {
     }
   }
   componentDidUpdate() {
-    this.CurrentPlayer()
+    this.CurrentPlayer();
     localStorage.setItem("state", JSON.stringify(this.state));
   }
   render() {
@@ -163,7 +161,7 @@ class Board extends React.Component {
       player2Wins,
     } = this.state;
     return (
-      <div>
+      <div className="bodyContainer">
         <div className="playerContainer">
           <div id="player1">
             <Player

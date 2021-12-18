@@ -1,31 +1,48 @@
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
-body {
+.blurContainer {
   position: relative;
   height: 100vh;
   width: 100vw;
-  /* background-image: url("./pexels-anna-shvets-6664193.jpeg"); */
+}
+.background {
+  position: absolute;
+  background-image: url("./pexels-anna-shvets-6664193.jpeg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  backdrop-filter: blur(1px);
+  filter: blur(10px);
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+}
+.bodyContainer {
+  height: 100vh;
+  width: 100vw;
 }
 .playerContainer {
   display: flex;
-  width: 90%;
-  margin: 20vh auto 0 auto;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
 }
 #player1 {
-  width: 50%;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius:10px ;
+  width: 40%;
   height: 70vh;
   background-color: #eeeeee;
   display: flex;
   justify-content: center;
 }
 #player2 {
-  width: 50%;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  width: 40%;
   height: 70vh;
   background-color: #eeeeee;
   display: flex;
@@ -74,21 +91,18 @@ p {
   background-color: #009ba3;
   border: 2px solid #00adb5;
 }
-.btn:active {
-  position: relative;
-  top: 1px;
-}
 .inputsContainer {
-  width: min-content;
+  position: absolute;
+  top: 60vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 auto;
-  transform: translateY(-45vh);
 }
-.hold {
-  transform: translateY(-45px);
-}
+
 .input {
-  transform: translateY(-50px);
+  padding: 10px 0 10px 10px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
 }
