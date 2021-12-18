@@ -72,21 +72,17 @@ class Board extends React.Component {
       );
     }
   };
-
   CurrentPlayer = () => {
-    // "#eeeeee"
     const playerColor1 = document.querySelector("#player1");
     const playerColor2 = document.querySelector("#player2");
     playerColor1.className = "";
     playerColor2.className = "";
-
     if (this.state.playerTurn === 1) {
       playerColor1.className = "colors";
     } else {
       playerColor2.className = "colors";
     }
   };
-
   onChaneValue = (event) => {
     if (+event.target.value) {
       console.log("works from change");
@@ -119,7 +115,6 @@ class Board extends React.Component {
       });
     }
   };
-
   Clear = () => {
     this.setState({
       playerScore1: 0,
@@ -151,12 +146,10 @@ class Board extends React.Component {
       this.setState(JSON.parse(window.localStorage.getItem("state")));
     }
   }
-
   componentDidUpdate() {
     this.CurrentPlayer()
     localStorage.setItem("state", JSON.stringify(this.state));
   }
-
   render() {
     const {
       playerScore1,
@@ -201,6 +194,7 @@ class Board extends React.Component {
             minLength="1"
             maxLength="3"
             vlaue={inputValue}
+            placeholder="Enter Ending Number"
             onChange={(event) => this.onChaneValue(event)}
           />
         </div>
